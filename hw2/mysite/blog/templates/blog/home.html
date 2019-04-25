@@ -1,0 +1,17 @@
+{% extends 'blog/main.html' %}
+
+{% block main_section %}
+
+    {% for post in news %}
+        <h1>{{ post.title }}</h1>
+        <p>{{ post.text }}</p>
+        {% if post.avtor %}
+            <p>Автор: {{ post.avtor }}</p>
+        {% else %}
+            <p>Автор: админ</p>
+        {% endif %}
+        <p>Дата: {{ post.date }}</p>
+    {% endfor %}
+
+{% endblock main_section %}
+
