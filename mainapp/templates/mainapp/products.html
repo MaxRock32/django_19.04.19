@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Продукты</title>
-</head>
-<body>
-<ul class="menu">
-    <li><a href="/">домой</a></li>
-    <li><a href="/products/">продукты</a></li>
-    <li><a href="/contacts/">контакты</a></li>
-</ul>
-<h1>Продукты</h1>
-</body>
-</html>
+{% extends 'mainapp/base.html' %}
+
+{% block title %}
+    <title>Products</title>
+{% endblock %}
+
+{% block content %}
+    {% include 'mainapp/includes/inc_menu.html' %}
+    <h1>Products</h1>
+    {% for product in products %}
+        <h3>{{ product.name }}</h3>
+        <img src="{{ product.image.url }}">
+        <div>{{ product.short_desc }}</div>
+    {% endfor %}
+{% endblock %}
