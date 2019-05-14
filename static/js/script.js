@@ -1,1 +1,0 @@
-document.getElementById('root').innerText = '<h1>ROOT</h1>';
