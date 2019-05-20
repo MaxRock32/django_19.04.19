@@ -228,6 +228,7 @@ body {
 .featured-product-in-box {
     width: 270px;
     height: 270px;
+    background-size: 270px;
     margin-bottom: 30px;
 }
 
@@ -376,6 +377,7 @@ body {
 .trending-product {
     width: 370px;
     height: 370px;
+    background-size: 370px;
     margin-bottom: 30px;
 }
 
@@ -462,6 +464,7 @@ body {
 .exclusive-content-product-in-box {
     height: 270px;
     width: 270px;
+    background-size: 270px;
     margin-bottom: 30px;
 }
 
@@ -777,6 +780,7 @@ body {
     display: flex;
     align-items: center;
     margin-top: 71px;
+    margin-bottom: 22px;
 }
 
 .products-nav-list {
@@ -788,17 +792,20 @@ body {
     flex-wrap: wrap;
     justify-content: space-between;
     align-content: space-between;
-    margin-top: 49px;
+    margin-top: 27px;
     width: 100%;
 }
 
 .product {
     width: 370px;
     height: 370px;
+    background-size: 370px;
     margin-bottom: 30px;
 }
 
-
+.product:nth-child(3n-1):last-child {
+    margin-right: 34.2%;
+}
 
 .products-nav-link:hover {
     border-bottom: 1px solid #6c6c6c;
@@ -818,7 +825,6 @@ body {
 
 
 .related-products {
-    /*    height: 468px;*/
     background-color: #fff;
     padding-bottom: 90px;
 }
@@ -841,7 +847,12 @@ body {
 .related-product {
     width: 370px;
     height: 370px;
+    background-size: 370px;
     margin-bottom: 30px;
+}
+
+.related-product:nth-child(3n-1):last-child {
+    margin-right: 34.2%;
 }
 
 .related-products-content {
@@ -867,6 +878,7 @@ body {
 .product-img {
     width: 570px;
     height: 570px;
+    background-size: 570px;
 }
 
 .product-slider {
@@ -885,6 +897,7 @@ body {
 .product-mini-img {
     width: 70px;
     height: 70px;
+    background-size: 70px;
     margin: 0 5px;
 }
 
@@ -1127,4 +1140,41 @@ body {
 .fa-map-marker-alt {
     color: #212121;
     font-size: 48px;
+}
+
+.product-list-title {
+    margin-top: 20px;
+}
+
+.menu-basket {
+    margin: 2px 15px 0;
+}
+
+.menu-basket-counter {
+    display: block;
+    width: auto;
+    color: #43a047;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 8px 0;
+}
+
+.menu-auth {
+    margin-top: 5px;
+    margin-left: 15px;
+    text-align: right;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.menu-auth-link {
+    display: block;
+    height: 5px;
+    color: #212121;
+    text-decoration: none;
+}
+
+.menu-auth-link:hover {
+    text-decoration: underline;
 }
