@@ -1,0 +1,22 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="admin-object-record admin-object-record-delete">
+        Уверены, что хотите удалить {{ shopuser.username }}
+        {% if shopuser.first_name %}
+            ({{ shopuser.first_name|title }}
+            {% if shopuser.last_name %}
+                {{ shopuser.last_name|title }}
+            {% endif %})
+        {% endif %}
+        ?
+        <div class="admin-object-actions admin-object-actions-delete">
+            <form action="{% url 'admin_custom:user_delete' shopuser.pk %}" method="post">
+                {% csrf_token %}
+                <input class="admin-object-actions-link admin-object-actions-link-delete" type="submit" value="удалить">
+            </form>
+            <a class="admin-object-actions-link admin-object-actions-link-delete" href="{% url 'admin_custom:users' %}">Отмена</a>
+        </div>
+    </div>
+{% endblock %}

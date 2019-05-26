@@ -1,0 +1,39 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="products_list">
+        <div class="admin-new-item">
+            <h4 class="admin-item-name">Категория:&nbsp;<b>{{ category_name }}</b></h4>
+            <a class="admin-new-item-button" href= {% url 'admin_custom:product_create' category_pk %}>Создать новый продукт</a>
+        </div>
+
+        {% for object in object_list %}
+            <div class="admin-object-record
+                {% if not object.is_active %}
+                    not_active
+                {% endif %}">
+                <div class="admin-object-img" style="background-image: url('/media/{{ object.image|default:'products_images/default.jpg' }}')"></div>
+                <div class="admin-text-about">
+                    <h4 class="admin-object-name">
+                        {{ object.name|title }}
+                    </h4>
+                    <h4 class="admin-object-desc">
+                        {{ object.short_desc|title }}
+                    </h4>
+                </div>
+                <div class="admin-summary">
+                    <h4 class="admin-summary-text"><b>цена</b>&nbsp;{{ object.price }}$</h4>
+                    <h4 class="admin-summary-text"><b>количество</b>&nbsp;{{ object.quantity }}</h4>
+                </div>
+                <div class="admin-object-actions">
+                    <a class="admin-object-actions-link" href= {% url 'admin_custom:product_read' object.pk %}>подробнее</a>
+                    <a class="admin-object-actions-link" href= {% url 'admin_custom:product_update' object.pk %}>редактировать</a>
+                    <a class="admin-object-actions-link" href= {% url 'admin_custom:product_delete' object.pk %}>удалить</a>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+{% endblock %}

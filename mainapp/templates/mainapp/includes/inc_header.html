@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_tags %}
 
 <a class="logo" href="/"><img src="{% static 'img/logo.svg' %}" alt="logo"></a>
 <ul class="menu">
@@ -8,18 +9,46 @@
            class="menu-link {% if request.resolver_match.namespace == 'products' %}menu-link-active{% endif %}">PRODUCTS</a></li>
     <li><a href="#"
            class="menu-link {% if request.resolver_match.url_name == '#' %}menu-link-active{% endif %}">HISTORY</a></li>
-    <li><a href="{% url 'product-details' %}"
-           class="menu-link {% if request.resolver_match.url_name == 'product-details' %}menu-link-active{% endif %}">SHOWROOM</a></li>
+    <li><a href="{% url 'showroom' %}"
+           class="menu-link {% if request.resolver_match.url_name == 'showroom' or request.resolver_match.url_name == 'product-details' %}menu-link-active{% endif %}">SHOWROOM</a></li>
     <li><a href="{% url 'contacts' %}"
            class="menu-link {% if request.resolver_match.url_name == 'contacts' %}menu-link-active{% endif %}">CONTACT</a></li>
     <li><a href="#" class="menu-link"><img src="{% static 'img/search.svg' %}" alt="search"></a></li>
+    <li>
+        <div class = "menu-basket">
+            <a class = "menu-basket-link" href = "{% url 'basket:view' %}">
+                <img src="{% static 'img/bag.svg' %}" alt="basket">
+                {% if user.is_authenticated %}
+                    <h4 class="menu-basket-counter">
+                        qty:&nbsp;{{ request.user|get_products_total_quantity_by_user }}&nbsp;pcs
+                        <br>
+                        price:&nbsp;{{ request.user|get_products_total_price_by_user }}$
+{#                        {% if basket %}#}
+{#                            qty:&nbsp;{{ products_total_quantity|floatformat:0 }}&nbsp;pcs#}
+{#                            <br>#}
+{#                            price:&nbsp;{{ products_total_price }}$#}
+{#                        {% endif %}#}
+                    </h4>
+                {% endif %}
+            </a>
+        </div>
+    </li>
     {% if user.is_authenticated %}
-        <li><a class="menu-link" href = "{% url 'auth:edit' %}">{{ user.username|default:'User' }} (edit)</a></li>
-    {% endif %}
-    {% if user.is_authenticated %}
-        <li><a class="menu-link" href = "{% url 'auth:logout' %}">logout</a></li>
+        <span class="menu-auth">
+            <a class="menu-auth-link" href = "{% url 'auth:edit' %}">{{ user.username|truncatechars_html:5 }}&nbsp;(edit)</a>
+            <br>
+            <a class="menu-auth-link" href = "{% url 'auth:logout' %}">logout</a>
+        </span>
+        {% if user.is_superuser %}
+            <a class="menu-auth menu-auth-link" href = "{% url 'admin_custom:users' %}">админка</a>
+        {% endif %}
     {% else %}
-        <li><a class="menu-link" href = "{% url 'auth:login' %}">login</a></li>
-        <li><a class="menu-link" href = "{% url 'auth:register' %}">register</a></li>
+        <span class="menu-auth">
+            <a class="menu-auth-link" href = "{% url 'auth:login' %}">login</a>
+            <br>
+            <a class="menu-auth-link" href = "{% url 'auth:register' %}">register</a>
+            <br>
+            <a class="menu-auth-link" href="{% url 'social:begin' 'vk-oauth2' %}">login via VK</a>
+        </span>
     {% endif %}
 </ul>
